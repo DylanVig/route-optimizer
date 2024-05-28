@@ -17,8 +17,8 @@ public class UserConfig {
             User dylan = new User(
                     1L,
                     "Dylan",
-                    "drv36",
-                    "Ryanv0817!"
+                    "dylanvig1",
+                    "dylanvig1"
             );
             User ryan = new User(
                     "Ryan",
