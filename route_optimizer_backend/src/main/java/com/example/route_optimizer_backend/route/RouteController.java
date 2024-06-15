@@ -14,8 +14,23 @@ public class RouteController {
         this.routeService = routeService;
     }
 
-    @RequestMapping(value = "/two-locations", method = RequestMethod.GET)
-    public void twoLocationCalculation() {
-        routeService.singleDistanceCalculator("141 W 24 Street, New York, NY 10011", "5 W 93rd Street, New York, NY 10025");
+    @RequestMapping(value = "/distance-matrix", method = RequestMethod.GET)
+    public String[] distanceMatrix(String[] location) {
+        String[] locations = {
+                "141 W 24 Street, New York, NY 10011",
+                "5 W 93 Street, New York, NY 10025"
+        };
+        int[][] travelTimeMatrix = routeService.travelTimeMatrix(location);
+
     }
+
+    @RequestMapping(value = "/time-matrix", method = RequestMethod.GET)
+    public void timeMatrix(String[] location) {
+        String[] locations = {
+                "141 W 24 Street, New York, NY 10011",
+                "5 W 93 Street, New York, NY 10025"
+        };
+        routeService.travelTimeMatrix(locations);
+    }
+
 }
