@@ -95,9 +95,7 @@ public class RouteService {
                 else {
                     timeTable[i][j] = singleTimeValueCalculator(locations[i], locations[j]);
                 }
-                System.out.print(timeTable[i][j] + ", ");
             }
-            System.out.println("");
         }
         return timeTable;
     }
@@ -111,6 +109,9 @@ public class RouteService {
         return routeTime;
     }
 
+    // TODO: Solved the create permutations challenge, now all I need to do is convert it to travel times and
+    // actually finish the problem!!!
+
     /**
      * Optimized route based on time estimates, returned in an integer array indicating
      * the indexes in the travelTimeMatrix
@@ -119,10 +120,9 @@ public class RouteService {
     public String[] optimizedTimeRoute(int[][] travelTimeMatrix, String[] locations) {
         // If there are less than 8 locations, it is more efficient to brute force it than use
         // an algorithm
-        List<int[]> permutations = new ArrayList<>();
         // TODO Make permutations part then use to fill in the methods
-        if (travelTimeMatrix.length <= 7) {
-            return bruteForceRoute(travelTimeMatrix, locations, permutations);
+        if (locations.length <= 7) {
+            return bruteForceRoute(travelTimeMatrix, locations, permutations(locations));
         }
         else {
             return new String[]{"hi"};
@@ -130,7 +130,36 @@ public class RouteService {
         }
     }
 
-    // Done?
+    private void permute (int[] indexes, int l, int r, List<int[]> permutations) {
+        if (l == r) {
+            permutations.add(indexes.clone());
+        }
+        else {
+            for (int i = l; i <= r; i++) {
+                indexes = swap(indexes, l, i);
+                permute(indexes, l + 1, r, permutations);
+                indexes = swap(indexes, l, i);
+            }
+        }
+    }
+
+    private int[] swap (int[] a, int i, int j) {
+        int x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+        return a;
+    }
+
+    public List<int[]> permutations (String[] locations) {
+        List<int[]> permutations = new ArrayList<>();
+        int[] indexes = new int[locations.length];
+        for (int i = 0; i < locations.length; i++) {
+            indexes[i] = i;
+        }
+        permute(indexes, 0, locations.length - 1, permutations);
+        return permutations;
+    }
+
     public String[] bruteForceRoute(int[][] travelTimeMatrix, String[] locations, List<int[]> permutations) {
         String[] finalRoute = new String[travelTimeMatrix.length + 1];
         int[] optimizedRoute = new int[travelTimeMatrix.length];
