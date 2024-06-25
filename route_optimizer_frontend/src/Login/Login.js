@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import LoginOperations from './LoginOperations.js'
+import './Login.css'
 
 export default function Login({ onLogin }) {
     const [name, setName] = useState('');
@@ -11,11 +12,9 @@ export default function Login({ onLogin }) {
 
     function login() {
         LoginOperations.login(loginUsername, loginPassword, (data) => {
-            // Use the user data returned from the backend
             console.log("User ID:", data.id);
             console.log("User Name:", data.name);
             console.log("User Username:", data.username);
-            // Perform further actions, such as updating the state or calling onLogin
             onLogin(data);
         });
     }
@@ -30,9 +29,9 @@ export default function Login({ onLogin }) {
     }
 
     return (
-        <div>
+        <div className="login">
             <h1>Login</h1>
-            <form onSubmit={(e) => { e.preventDefault(); login(); }}>
+            <form onSubmit={(e) => { e.preventDefault(); login(); }} className="formFormat">
                 <input
                     type="text"
                     name="email"
@@ -52,7 +51,7 @@ export default function Login({ onLogin }) {
                 <button type="submit">Login</button>
             </form>
             <h1>Register</h1>
-            <form onSubmit={(e) => { e.preventDefault(); register(); }}>
+            <form onSubmit={(e) => { e.preventDefault(); register(); }} className="formFormat">
                 <input
                     type="text"
                     name="name"
