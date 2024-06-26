@@ -2,7 +2,7 @@ import Login from '../Login/Login.js'
 import './Intro.css'
 import { useState, useEffect } from 'react'
 
-export default function Intro({ handleLogin }) {
+export default function Intro({ onLogin }) {
     
     const [loaded, setLoaded] = useState(0); 
 
@@ -21,7 +21,7 @@ export default function Intro({ handleLogin }) {
                 <div className="introTitle">
                     <h1>Tour Guide Optimizer</h1>
                 </div>
-                <Login onLogin={handleLogin} /> 
+                <Login onLogin={onLogin} /> 
             </center>
         </div>
     )
