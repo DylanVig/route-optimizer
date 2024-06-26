@@ -12,7 +12,7 @@ import java.util.List;
 public class UserConfig {
 
     @Bean
-    CommandLineRunner commandLineRunner(UserRepository repository) {
+    CommandLineRunner commandLineRunnerUser(UserRepository repository) {
         return args -> {
             User dylan = new User(
                     1L,

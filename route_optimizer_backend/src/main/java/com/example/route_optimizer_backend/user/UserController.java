@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -21,6 +23,16 @@ public class UserController {
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getUsers();
+    }
+
+    @RequestMapping(value = "/details", method = RequestMethod.GET)
+    public Map<String, String> getUsernameById(@RequestHeader("UserId") Long userId) {
+        User user = userService.findUserById(userId);
+        Map<String, String> userDetails = new HashMap<>();
+        userDetails.put("username", user.getUsername());
+        userDetails.put("name", user.getName());
+        userDetails.put("password", user.getPassword());
+        return userDetails;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

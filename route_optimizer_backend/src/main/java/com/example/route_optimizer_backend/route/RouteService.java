@@ -1,11 +1,14 @@
 package com.example.route_optimizer_backend.route;
 
+import com.example.route_optimizer_backend.user.User;
+import com.example.route_optimizer_backend.user.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonObject;
 import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.convert.ValueConverter;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,9 +36,16 @@ public class RouteService {
     private String apiKey;
 
     private final RestTemplate restTemplate;
+    private final RouteRepository routeRepository;
 
-    public RouteService(RestTemplate restTemplate) {
+    public RouteService(RestTemplate restTemplate, RouteRepository routeRepository) {
         this.restTemplate = restTemplate;
+        this.routeRepository = routeRepository;
+    }
+
+    // Not concerned about duplicates so it's ok to have multiple of the same, just add it
+    public void addNewRoute(Route route) {
+        routeRepository.save(route);
     }
 
     /**

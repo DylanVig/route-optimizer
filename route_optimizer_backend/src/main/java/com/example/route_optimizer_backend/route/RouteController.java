@@ -1,7 +1,10 @@
 package com.example.route_optimizer_backend.route;
 
+import com.example.route_optimizer_backend.user.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -30,6 +33,14 @@ public class RouteController {
                 "5 W 93 Street, New York, NY 10025"
         };
         routeService.travelTimeMatrix(locations);
+    }
+
+    @RequestMapping(value = "/save-route", method = RequestMethod.POST)
+    public void saveRoute(@RequestHeader String routeName,
+                          @RequestHeader Long userId,
+                          @RequestHeader String routeDescription,
+                          @RequestHeader String[] routeOrder) {
+        routeService.addNewRoute(new Route(userId, routeName, routeDescription, routeOrder));
     }
 
 }

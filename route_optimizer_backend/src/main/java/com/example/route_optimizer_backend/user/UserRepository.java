@@ -14,4 +14,6 @@ public interface UserRepository
     @Query("SELECT u FROM User u WHERE u.username = ?1")
     Optional<User> findUserByUsername(String username);
 
+    @Query("SELECT u FROM User u WHERE u.id = ?1")
+    Optional<User> findUserById(Long id);
 }

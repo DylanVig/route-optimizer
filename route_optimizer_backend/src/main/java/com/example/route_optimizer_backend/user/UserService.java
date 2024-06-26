@@ -69,4 +69,20 @@ public class UserService {
             user.setPassword(password);
         }
     }
+
+    public User findUserByUsername(String username) {
+        Optional<User> userOptional = userRepository.findUserByUsername(username);
+        if (!userOptional.isPresent()) {
+            throw new IllegalStateException("This User Does Not Exist");
+        }
+        return userOptional.get();
+    }
+
+    public User findUserById(Long userId) {
+        Optional<User> userOptional = userRepository.findUserById(userId);
+        if (!userOptional.isPresent()) {
+            throw new IllegalStateException("This User Does Not Exist");
+        }
+        return userOptional.get();
+    }
 }
