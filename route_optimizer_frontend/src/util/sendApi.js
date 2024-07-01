@@ -15,3 +15,20 @@ export const RegisterRequest = {
             .fail(failureCallback)
     }
 }
+
+export const RouteRequest = {
+    saveRoute: function(routeName, userId, routeDescription, routeOrder, successCallback, failureCallback) {
+        $.ajax({
+            url: 'http://localhost:8080/api/v1/route/save-route',
+            method: 'POST',
+            headers: {
+                RouteName: routeName,
+                UserId: userId,
+                RouteDescription: routeDescription,
+                RouteOrder: routeOrder
+            }
+        })
+            .done(successCallback)
+            .fail(failureCallback)
+    }
+}
