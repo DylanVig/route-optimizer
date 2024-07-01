@@ -35,11 +35,17 @@ public class RouteController {
         routeService.travelTimeMatrix(locations);
     }
 
+    @RequestMapping(value = "/optimizer", method = RequestMethod.GET)
+    public String[] optimizer(String[] locations) {
+        int[][] travelTimeMatrix = routeService.travelTimeMatrix(locations);
+        return routeService.optimizedTimeRoute(travelTimeMatrix, locations);
+    }
+
     @RequestMapping(value = "/save-route", method = RequestMethod.POST)
-    public void saveRoute(@RequestHeader String routeName,
-                          @RequestHeader Long userId,
-                          @RequestHeader String routeDescription,
-                          @RequestHeader String[] routeOrder) {
+    public void saveRoute(@RequestHeader("RouteName") String routeName,
+                          @RequestHeader("UserId") Long userId,
+                          @RequestHeader("RouteDescription") String routeDescription,
+                          @RequestHeader("RouteOrder") String[] routeOrder) {
         routeService.addNewRoute(new Route(userId, routeName, routeDescription, routeOrder));
     }
 
