@@ -136,7 +136,7 @@ public class RouteService {
             return bruteForceRoute(travelTimeMatrix, locations, permutations(locations));
         }
         else {
-            return new String[]{"hi"};
+            return new String[]{"hello"};
             // return heldKarpAlgorithmRoute(travelTimeMatrix, locations);
         }
     }
