@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import "./Route.css";
-import RouteOperations from './RouteOperations.js'
+import RouteOperations from './RouteOperations.js';
+import MapDisplay from "../MapDisplay/MapDisplay.js";
 
 export default function Route({ user }) {
   const [routeName, setRouteName] = useState("");
@@ -28,8 +29,7 @@ export default function Route({ user }) {
 
   const optimizeRoute = () => {
     RouteOperations.optimize(locations, setOptimizedRoute);
-    setOptimizedRoute(JSON.stringify(optimizedRoute));
-  }
+  };
 
   const handleLocationChange = (index, value) => {
     const newLocations = [...locations];
@@ -85,9 +85,9 @@ export default function Route({ user }) {
         />
       ))}
       <div>
-        <p>Selected number of locations: {locationNum}</p>
+        {/* <p>Selected number of locations: {locationNum}</p>
         <p>Locations: {JSON.stringify(locations)}</p>
-        <p>Location Num: {locationNum}</p>
+        <p>Location Num: {locationNum}</p> */}
       </div>
       <button onClick={optimizeRoute}>Generate Route</button>
       <div>
@@ -99,6 +99,7 @@ export default function Route({ user }) {
                 <li key={index}>{location}</li>
               ))}
             </ol>
+            <MapDisplay />
           </div>
         )}
       </div>

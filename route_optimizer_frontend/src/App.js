@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Login from './Login/Login.js'
+import MapDisplay from './MapDisplay/MapDisplay.js'
 import Intro from './IntroPage/Intro.js'
 import { useState, useEffect } from 'react'
 import Account from './Account/Account.js'

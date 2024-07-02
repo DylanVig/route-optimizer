@@ -41,26 +41,24 @@ export default function Account({ userId }) {
     <div className="account">
       <h1>Hey {name}, Let's Create a Route!</h1>
       <Popup
-    trigger={<button className="button"> Create Route </button>}
-    modal
-    nested
-  >
-    {close => (
-      <div className="modal">
-        <button className="close" onClick={close}>
-          &times;
-        </button>
-        <center>
-        <div className="header" style={{ fontSize: '32px', fontWeight: 'bold' }}> Create Route </div>
-        <div className="content">
-          <Route user={userId} />
-        </div>
-        <div className="actions"> 
-        </div>
-        </center>
-      </div>
-    )}
-  </Popup>
+        trigger={<button className="button"> Create Route </button>}
+        modal
+        nested
+      >
+        {close => (
+          <div className="modal">
+            <button className="close" onClick={close}>
+              &times;
+            </button>
+            <center>
+              <div className="header" style={{ fontSize: '32px', fontWeight: 'bold' }}> Create Route </div>
+              <div className="scrollable-content">
+                <Route user={userId} />
+              </div>
+            </center>
+          </div>
+        )}
+      </Popup>
     </div>
   );
 }

@@ -11,6 +11,39 @@ body {
     background-attachment: fixed;
 }
 
-.account {
-    /* Your other account-specific styles */
+/* Styles for the modal and scrollable content */
+.modal {
+    position: fixed; /* Ensure the modal is fixed */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust the centering */
+    background: #fff;
+    border-radius: 10px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90%;
+    overflow: hidden;
+    box-sizing: border-box; /* Include padding and border in width and height */
+}
+
+.scrollable-content {
+    flex: 1;
+    max-height: 70vh; /* Adjust based on your needs */
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box; /* Include padding and border in width and height */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.header {
+    margin: 10px;
 }
