@@ -1,14 +1,14 @@
 import { RouteRequest } from '../util/receiveApi.js'
 
 const RouteOperations = {
-    optimize: (locations) => {
+    optimize: (locations, setOptimizedRoute) => {
         const success = (data) => {
             console.log("Successful");
-
+            setOptimizedRoute(data);
         };
         const failure = (message) => {
             console.log("Failed: " + message);
-            alert("Login failed: " + message);
+            alert("Optimization failed: " + message);
         };
         RouteRequest.getOptimizedRoute(locations, success, failure);
     }

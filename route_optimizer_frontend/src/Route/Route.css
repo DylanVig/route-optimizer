@@ -14,6 +14,17 @@
     button {
         margin: 3px;
     }
+
+    /* Route.css */
+    ol {
+        padding-left: 20px; /* Adjust this value as needed */
+    }
+  
+    ol li {
+        margin: 0;
+        padding: 0;
+        list-style-position: inside;
+    }
 }
 
 .dropdown {

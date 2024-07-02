@@ -22,14 +22,38 @@ export const AccountRequest = {
     }
 };
 
+// export const RouteRequest = {
+//     getOptimizedRoute: function (locations, successCallback, failureCallback) {
+//         fetch('http://localhost:8080/api/v1/route/optimizer', {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Locations': locations
+//             }
+//         })
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error('Could not retrieve optimized route');
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             successCallback(data);
+//         })
+//         .catch(error => {
+//             failureCallback(error.message);
+//         });
+//     }
+// }
+
 export const RouteRequest = {
     getOptimizedRoute: function (locations, successCallback, failureCallback) {
         fetch('http://localhost:8080/api/v1/route/optimizer', {
-            method: 'GET',
+            method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Locations': locations,
-            }
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ locations }) // Send locations as JSON body
         })
         .then(response => {
             if (!response.ok) {
@@ -45,6 +69,8 @@ export const RouteRequest = {
         });
     }
 }
+
+
 
 export const LoginRequest = {
     loginAccount: function (username, password, successCallback, failureCallback) {

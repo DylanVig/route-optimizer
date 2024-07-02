@@ -10,6 +10,7 @@ export default function Route({ user }) {
   const [country, setCountry] = useState("");
   const [locationNum, setLocationNum] = useState(4);
   const [locations, setLocations] = useState(Array(4).fill(""));
+  const [optimizedRoute, setOptimizedRoute] = useState([]);
 
   const options = [
     { value: 4, label: "4" },
@@ -26,8 +27,8 @@ export default function Route({ user }) {
   };
 
   const optimizeRoute = () => {
-    const optimizedRoute = RouteOperations.optimize(locations);
-    setLocations(optimizedRoute);
+    RouteOperations.optimize(locations, setOptimizedRoute);
+    setOptimizedRoute(JSON.stringify(optimizedRoute));
   }
 
   const handleLocationChange = (index, value) => {
@@ -86,8 +87,21 @@ export default function Route({ user }) {
       <div>
         <p>Selected number of locations: {locationNum}</p>
         <p>Locations: {JSON.stringify(locations)}</p>
+        <p>Location Num: {locationNum}</p>
       </div>
       <button onClick={optimizeRoute}>Generate Route</button>
+      <div>
+        {optimizedRoute.length > 0 && (
+          <div>
+            <p>Here is the order of locations:</p>
+            <ol>
+              {optimizedRoute.map((location, index) => (
+                <li key={index}>{location}</li>
+              ))}
+            </ol>
+          </div>
+        )}
+      </div>
       <button>Save Route</button>
     </div>
   );
