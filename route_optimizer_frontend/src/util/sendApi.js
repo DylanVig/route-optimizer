@@ -16,14 +16,14 @@ export const RegisterRequest = {
     }
 }
 
-export const RouteRequest = {
-    saveRoute: function(routeName, userId, routeDescription, routeOrder, successCallback, failureCallback) {
+export const RouteSendRequest = {
+    saveRoute: function(userId, routeName, routeDescription, routeOrder, successCallback, failureCallback) {
         $.ajax({
             url: 'http://localhost:8080/api/v1/route/save-route',
             method: 'POST',
             headers: {
-                RouteName: routeName,
                 UserId: userId,
+                RouteName: routeName,
                 RouteDescription: routeDescription,
                 RouteOrder: routeOrder
             }

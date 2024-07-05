@@ -5,10 +5,11 @@ import "./Route.css";
 import RouteOperations from './RouteOperations.js';
 import MapDisplay from "../MapDisplay/MapDisplay.js";
 
-export default function Route({ user }) {
+export default function Route({ user, closePopup }) {
   const [routeName, setRouteName] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
+  const [routeDescription, setRouteDescription] = useState("");
   const [locationNum, setLocationNum] = useState(4);
   const [locations, setLocations] = useState(Array(4).fill(""));
   const [optimizedRoute, setOptimizedRoute] = useState([]);
@@ -35,6 +36,11 @@ export default function Route({ user }) {
     const newLocations = [...locations];
     newLocations[index] = value;
     setLocations(newLocations);
+  };
+
+  const handleSaveRoute = () => {
+    RouteOperations.save(user, routeName, routeDescription, optimizedRoute);
+    closePopup();
   };
 
   const selectedOption = options.find((option) => option.value === locationNum);
@@ -65,6 +71,15 @@ export default function Route({ user }) {
         onChange={(e) => setCountry(e.target.value)}
         required
       />
+      <textarea
+        name="routeDescription"
+        cols="30"
+        rows="5"
+        placeholder="Route Description"
+        value={routeDescription}
+        onChange={(e) => setRouteDescription(e.target.value)}
+        required
+      />
       <div className="dropdown">
         <Dropdown
           options={options}
@@ -84,11 +99,6 @@ export default function Route({ user }) {
           required
         />
       ))}
-      <div>
-        {/* <p>Selected number of locations: {locationNum}</p>
-        <p>Locations: {JSON.stringify(locations)}</p>
-        <p>Location Num: {locationNum}</p> */}
-      </div>
       <button onClick={optimizeRoute}>Generate Route</button>
       <div>
         {optimizedRoute.length > 0 && (
@@ -103,7 +113,7 @@ export default function Route({ user }) {
           </div>
         )}
       </div>
-      <button>Save Route</button>
+      <button onClick={handleSaveRoute}>Save Route</button>
     </div>
   );
 }

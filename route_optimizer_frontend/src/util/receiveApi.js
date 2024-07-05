@@ -46,7 +46,7 @@ export const AccountRequest = {
 //     }
 // }
 
-export const RouteRequest = {
+export const RouteReceiveRequest = {
     getOptimizedRoute: function (locations, successCallback, failureCallback) {
         fetch('http://localhost:8080/api/v1/route/optimizer', {
             method: 'POST',

@@ -53,7 +53,7 @@ export default function Account({ userId }) {
             <center>
               <div className="header" style={{ fontSize: '32px', fontWeight: 'bold' }}> Create Route </div>
               <div className="scrollable-content">
-                <Route user={userId} />
+                <Route user={userId} closePopup={close}/>
               </div>
             </center>
           </div>
