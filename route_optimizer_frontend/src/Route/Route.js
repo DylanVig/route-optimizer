@@ -99,7 +99,7 @@ export default function Route({ user }) {
                 <li key={index}>{location}</li>
               ))}
             </ol>
-            <MapDisplay />
+            <MapDisplay locations={optimizedRoute}/>
           </div>
         )}
       </div>
