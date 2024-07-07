@@ -41,17 +41,6 @@ public class RouteController {
         routeService.travelTimeMatrix(locations);
     }
 
-    /**
-    @RequestMapping(value = "/optimizer", method = RequestMethod.GET)
-    public String[] optimizer(@RequestHeader("Locations") String[] locations) {
-        for (int i = 0; i < locations.length; i++) {
-            System.out.println(locations[i]);
-        }
-        int[][] travelTimeMatrix = routeService.travelTimeMatrix(locations);
-        return routeService.optimizedTimeRoute(travelTimeMatrix, locations);
-    }
-     */
-
     @RequestMapping(value = "/optimizer", method = RequestMethod.POST)
     public String[] optimizer(@RequestBody JsonNode requestBody) {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -67,7 +56,6 @@ public class RouteController {
         }
     }
 
-    // TODO: NEED TO FIX routeORDER SO THAT IT DOESN'T RETURN EACH ADDRESS BROKEN UP
     @RequestMapping(value = "/save-route", method = RequestMethod.POST)
     public void saveRoute(@RequestBody JsonNode requestBody) {
         Long userId = requestBody.get("userId").asLong();
@@ -77,6 +65,14 @@ public class RouteController {
         requestBody.get("routeOrder").forEach(node -> tempRoute.add(node.asText()));
         String[] routeOrder = tempRoute.toArray(new String[0]);
         routeService.addNewRoute(new Route(userId, routeName, routeDescription, routeOrder));
+    }
+
+    @RequestMapping(value = "/get-routes", method = RequestMethod.GET)
+    public Route[] getAllUserRoutes(@RequestHeader Long userId) {
+        System.out.println("Call Received: " + userId);
+        Route[] routes = routeService.getRouteList(userId);
+        System.out.println("Returning routes: " + Arrays.toString(routes));
+        return routes;
     }
 
 }

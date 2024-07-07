@@ -48,6 +48,11 @@ public class RouteService {
         routeRepository.save(route);
     }
 
+    public Route[] getRouteList(Long userId) {
+        Optional<Route[]> routeList = routeRepository.findRouteListByUserId(userId);
+        return routeList.get();
+    }
+
     /**
      * Calculate the distance between two locations given addresses
      */
