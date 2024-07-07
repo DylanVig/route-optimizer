@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -53,7 +54,6 @@ public class RouteController {
 
     @RequestMapping(value = "/optimizer", method = RequestMethod.POST)
     public String[] optimizer(@RequestBody JsonNode requestBody) {
-        System.out.println("Call Received");
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             String[] locations = objectMapper.convertValue(requestBody.get("locations"), String[].class);
@@ -67,11 +67,15 @@ public class RouteController {
         }
     }
 
+    // TODO: NEED TO FIX routeORDER SO THAT IT DOESN'T RETURN EACH ADDRESS BROKEN UP
     @RequestMapping(value = "/save-route", method = RequestMethod.POST)
-    public void saveRoute(@RequestHeader("RouteName") String routeName,
-                          @RequestHeader("UserId") Long userId,
-                          @RequestHeader("RouteDescription") String routeDescription,
-                          @RequestHeader("RouteOrder") String[] routeOrder) {
+    public void saveRoute(@RequestBody JsonNode requestBody) {
+        Long userId = requestBody.get("userId").asLong();
+        String routeName = requestBody.get("routeName").asText();
+        String routeDescription = requestBody.get("routeDescription").asText();
+        List<String> tempRoute = new ArrayList<>();
+        requestBody.get("routeOrder").forEach(node -> tempRoute.add(node.asText()));
+        String[] routeOrder = tempRoute.toArray(new String[0]);
         routeService.addNewRoute(new Route(userId, routeName, routeDescription, routeOrder));
     }
 
