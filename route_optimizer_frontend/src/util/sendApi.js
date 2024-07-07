@@ -21,12 +21,13 @@ export const RouteSendRequest = {
         $.ajax({
             url: 'http://localhost:8080/api/v1/route/save-route',
             method: 'POST',
-            headers: {
-                UserId: userId,
-                RouteName: routeName,
-                RouteDescription: routeDescription,
-                RouteOrder: routeOrder
-            }
+            contentType: 'application/json',
+            data: JSON.stringify({
+                userId: userId,
+                routeName: routeName,
+                routeDescription: routeDescription,
+                routeOrder: routeOrder
+            })
         })
             .done(successCallback)
             .fail(failureCallback)

@@ -53,7 +53,7 @@ export const RouteReceiveRequest = {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ locations }) // Send locations as JSON body
+            body: JSON.stringify({ locations })
         })
         .then(response => {
             if (!response.ok) {
