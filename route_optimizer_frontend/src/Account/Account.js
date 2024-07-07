@@ -3,6 +3,7 @@ import { AccountOperations } from "./AccountOperations.js";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Route from "../Route/Route.js";
+import RouteLog from "../RouteLog/RouteLog.js";
 import './Account.css';
 
 export default function Account({ userId }) {
@@ -18,9 +19,6 @@ export default function Account({ userId }) {
         setUsername(data.username);
         setPassword(data.password);
         setName(data.name);
-        console.log("Username set to:", data.username);
-        console.log("Password set to:", data.password);
-        console.log("Name set to:", data.name);
       } else {
         console.log("Unexpected data format:", data);
       }
@@ -59,6 +57,9 @@ export default function Account({ userId }) {
           </div>
         )}
       </Popup>
+      <RouteLog userId={userId} />
+      {/* Based on the userId, we get a list of routeIDs that have that userId, then after 
+      that what we need to do is  */}
     </div>
   );
 }

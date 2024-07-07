@@ -70,7 +70,30 @@ export const RouteReceiveRequest = {
     }
 }
 
-
+export const RouteLogReceiveRequest = {
+    getRouteList: function (userId, successCallback, failureCallback) {
+        fetch('http://localhost:8080/api/v1/route/get-routes', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'UserId': userId
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch routes');
+            }
+            return response.json(); // Convert response to JSON
+        })
+        .then(data => {
+            console.log("Fetched data:", data);  // Log the actual data
+            successCallback(data);
+        })
+        .catch(error => {
+            failureCallback(error.message);
+        });
+    }
+}
 
 export const LoginRequest = {
     loginAccount: function (username, password, successCallback, failureCallback) {
