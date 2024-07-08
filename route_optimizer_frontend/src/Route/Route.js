@@ -5,7 +5,7 @@ import "./Route.css";
 import RouteOperations from './RouteOperations.js';
 import MapDisplay from "../MapDisplay/MapDisplay.js";
 
-export default function Route({ user, closePopup }) {
+export default function Route({ user, closePopup, updateAllRoutes }) { // Add updateAllRoutes as a prop
   const [routeName, setRouteName] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
@@ -40,6 +40,7 @@ export default function Route({ user, closePopup }) {
 
   const handleSaveRoute = () => {
     RouteOperations.save(user, routeName, routeDescription, optimizedRoute);
+    updateAllRoutes();
     closePopup();
   };
 

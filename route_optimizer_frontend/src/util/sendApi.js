@@ -33,3 +33,18 @@ export const RouteSendRequest = {
             .fail(failureCallback)
     }
 }
+
+export const RouteLogSendRequest = {
+    deleteRoute: function(routeId, successCallback, failureCallback) {
+        $.ajax({
+            url: 'http://localhost:8080/api/v1/route/delete-route',
+            method: 'DELETE',
+            contentType: 'application/json',
+            headers: {
+                RouteId: routeId
+            }
+        })
+            .done(successCallback)
+            .fail(failureCallback)
+    }
+}

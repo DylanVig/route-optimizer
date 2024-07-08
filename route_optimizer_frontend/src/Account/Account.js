@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AccountOperations } from "./AccountOperations.js";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
@@ -11,6 +11,7 @@ export default function Account({ userId }) {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState(null);
+  const routeLogRef = useRef();
 
   useEffect(() => {
     const success = (data) => {
@@ -21,6 +22,9 @@ export default function Account({ userId }) {
         setName(data.name);
       } else {
         console.log("Unexpected data format:", data);
+      }
+      if (routeLogRef.current) {
+        routeLogRef.current.updateAllRoutes();
       }
     };
     const failure = (message) => {
@@ -51,15 +55,13 @@ export default function Account({ userId }) {
             <center>
               <div className="header" style={{ fontSize: '32px', fontWeight: 'bold' }}> Create Route </div>
               <div className="scrollable-content">
-                <Route user={userId} closePopup={close}/>
+                <Route user={userId} closePopup={close} updateAllRoutes={() => routeLogRef.current.updateAllRoutes()} />
               </div>
             </center>
           </div>
         )}
       </Popup>
-      <RouteLog userId={userId} />
-      {/* Based on the userId, we get a list of routeIDs that have that userId, then after 
-      that what we need to do is  */}
+      <RouteLog ref={routeLogRef} userId={userId} />
     </div>
   );
 }

@@ -1,7 +1,22 @@
+.routeLogsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
 .log {
-    width: 30%;
     background-color: white;
     border-radius: 25px;
     padding: 10px;
     margin: 10px;
+    padding-bottom: 25px;
+}
+
+.routeOrder {
+    list-style-position: inside;
+}
+
+.routeOrder li {
+    margin: 0;
+    padding: 0;
 }
