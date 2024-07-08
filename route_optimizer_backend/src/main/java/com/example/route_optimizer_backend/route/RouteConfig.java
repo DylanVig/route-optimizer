@@ -24,15 +24,7 @@ public class RouteConfig {
     @Bean
     CommandLineRunner commandLineRunnerRoute(RouteRepository repository) {
         return args -> {
-            String[] routeOrder = new String[]{"141 W 24 Street, New York, NY 10011", "5 W 93 Street, New York, NY 10025", "116th and Broadway, New York, NY 10027", "53 Beach St, New York, NY 10013"};
-            Route newYorkRoute = new Route(
-                    1L,
-                    1L,
-                    "New York Tourist Route",
-                    "Demo route around New York",
-                    routeOrder
-            );
-            repository.saveAll(List.of(newYorkRoute));
+
         };
     }
 }

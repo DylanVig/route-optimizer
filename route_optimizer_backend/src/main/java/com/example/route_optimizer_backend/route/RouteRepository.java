@@ -13,4 +13,7 @@ public interface RouteRepository
 
     @Query("SELECT r FROM Route r WHERE r.userId = ?1")
     Optional<Route[]> findRouteListByUserId(Long userId);
+
+    @Query("SELECT r FROM Route r WHERE r.id = ?1")
+    Optional<Route> findRouteByRouteId(Long id);
 }

@@ -75,4 +75,9 @@ public class RouteController {
         return routes;
     }
 
+    @RequestMapping(value = "/delete-route", method = RequestMethod.DELETE)
+    public void deleteRoute(@RequestHeader("RouteId") Long routeId) {
+        routeService.deleteRoute(routeId);
+    }
+
 }

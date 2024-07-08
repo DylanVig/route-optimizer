@@ -53,6 +53,16 @@ public class RouteService {
         return routeList.get();
     }
 
+    public void deleteRoute(Long routeId) {
+        Optional<Route> route = routeRepository.findById(routeId);
+        if (route.isPresent()) {
+            routeRepository.delete(route.get());
+        }
+        else {
+            throw new IllegalStateException("This Route Doesn't Exist");
+        }
+    }
+
     /**
      * Calculate the distance between two locations given addresses
      */
