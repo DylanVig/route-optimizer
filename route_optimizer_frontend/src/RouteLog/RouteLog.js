@@ -19,11 +19,13 @@ const RouteLog = forwardRef(({ userId }, ref) => {
         updateAllRoutes
     }));
 
-    const deleteRoute = (routeId, closePopup) => {
-        closePopup();
-        RouteLogOperations.deleteRoute(routeId);
-        updateAllRoutes();
-    }
+    const deleteRoute = (routeId) => {
+        RouteLogOperations.deleteRoute(routeId)
+        .then(() => {
+            updateAllRoutes();
+        })
+        .catch(error => console.error("Failed to delete route:", error));
+    };
 
     return (
         <div>
@@ -80,7 +82,7 @@ const RouteLog = forwardRef(({ userId }, ref) => {
                                         >
                                             Are you sure you want to delete this route? This data will be permanently lost.
                                             <center>
-                                                <button onClick={() => deleteRoute(route.id, closePopup)} style={{ width: "55px" }}>Delete</button>
+                                                <button onClick={() => {deleteRoute(route.id); closePopup()}} style={{ width: "55px" }}>Delete</button>
                                             </center>
                                         </div>
                                     </center>
