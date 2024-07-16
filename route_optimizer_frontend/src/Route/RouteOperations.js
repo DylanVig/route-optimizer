@@ -14,14 +14,18 @@ const RouteOperations = {
         RouteReceiveRequest.getOptimizedRoute(locations, success, failure);
     },
     save: (userId, routeName, routeDescription, optimizedRoute) => {
-        const success = (data) => {
-            console.log("Successful");
-        };
-        const failure = (message) => {
-            console.log("Failed: " + message);
-            alert("Save failed: " + message);
-        };
-        RouteSendRequest.saveRoute(userId, routeName, routeDescription, optimizedRoute, success, failure);
+        return new Promise((resolve, reject) => {
+            const success = (data) => {
+                console.log("Successful");
+                resolve(data); // Resolve the promise on success
+            };
+            const failure = (message) => {
+                console.log("Failed: " + message);
+                alert("Save failed: " + message);
+                reject(new Error(message)); // Reject the promise on failure
+            };
+            RouteSendRequest.saveRoute(userId, routeName, routeDescription, optimizedRoute, success, failure);
+        });
     }
 }
 

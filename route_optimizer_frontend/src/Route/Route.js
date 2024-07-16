@@ -39,9 +39,11 @@ export default function Route({ user, closePopup, updateAllRoutes }) { // Add up
   };
 
   const handleSaveRoute = () => {
-    RouteOperations.save(user, routeName, routeDescription, optimizedRoute);
-    updateAllRoutes();
-    closePopup();
+    RouteOperations.save(user, routeName, routeDescription, optimizedRoute).then(() => {
+        updateAllRoutes(); 
+        closePopup();
+      })
+      .catch(error => console.error("Failed to save route:", error));
   };
 
   const selectedOption = options.find((option) => option.value === locationNum);
@@ -100,8 +102,10 @@ export default function Route({ user, closePopup, updateAllRoutes }) { // Add up
           required
         />
       ))}
-      <button onClick={optimizeRoute}>Generate Route</button>
       <div>
+        {optimizedRoute.length <= 0 && (
+          <button onClick={optimizeRoute}>Generate Route</button>
+        )}
         {optimizedRoute.length > 0 && (
           <div>
             <p>Here is the order of locations:</p>
@@ -111,10 +115,10 @@ export default function Route({ user, closePopup, updateAllRoutes }) { // Add up
               ))}
             </ol>
             <MapDisplay locations={optimizedRoute}/>
+            <button onClick={handleSaveRoute}>Save Route</button>
           </div>
         )}
       </div>
-      <button onClick={handleSaveRoute}>Save Route</button>
     </div>
   );
 }

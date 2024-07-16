@@ -40,8 +40,10 @@ export default function Account({ userId }) {
   }
 
   return (
-    <div className="account">
-      <h1>Hey {name}, Let's Create a Route!</h1>
+    <div className="account" style={{ filter: "drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.5)" }}>
+      <center>
+        <h1>Hey {name}, Let's Create a Route!</h1>
+      </center>
       <Popup
         trigger={<button className="button"> Create Route </button>}
         modal
