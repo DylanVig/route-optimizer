@@ -1,0 +1,1 @@
+export const tripAdvisorAPIKey = '28755CDEE7C645B6AB1E1816BF01170F'
